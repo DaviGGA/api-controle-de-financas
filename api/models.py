@@ -38,9 +38,22 @@ def despesa_filtro_descricao(descricao):
 
 class Despesa(models.Model):
     '''Cria as models de despesa'''
-    descricao = models.CharField (max_length= 100)
+    CATEGORIAS = (
+        ('Alimentação', 'Alimentação'),
+        ('Saúde','Saúde'),
+        ('Moradia', 'Moradia'),
+        ('Transporte', 'Transporte'),
+        ('Educação', 'Educação'),
+        ('Lazer', 'Lazer'),
+        ('Imprevistos', 'Imprevistos'),
+        ('Outras', 'Outras')
+    )
+    
+    descricao = models.CharField(max_length= 100)
     valor = models.FloatField()
     data = models.DateField()
+    categoria = models.CharField(choices = CATEGORIAS, default = 'Outras', blank = False, null = False, max_length = 15)
+    
     def save(self, *args, **kwargs): 
         if Despesa.objects.filter(descricao=self.descricao, data=self.data):
             raise ValueError("Registro Duplicado !")
@@ -59,3 +72,12 @@ class Despesa(models.Model):
             super().save(*args, **kwargs)
         else:
             raise ValueError("Erro no Registro !")
+
+
+class Resumo(models.Model):
+    receita_total = models.FloatField()
+    despesa_total = models.FloatField()
+    saldo = models.FloatField()
+    gasto_categoria = models.TextField()
+    
+
