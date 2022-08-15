@@ -1,11 +1,14 @@
 from rest_framework import serializers
-from api.models import Receita, Despesa, Resumo
+from api.models import Receita, Despesa
+from rest_framework.exceptions import ValidationError
+
 
 class ReceitasSerializer(serializers.ModelSerializer):
     '''Serializador da classe Receita'''
     class Meta:
         model = Receita
         fields = '__all__'
+
 
 class DespesasSerializer(serializers.ModelSerializer):
     '''Serializador da classe Despesa'''
@@ -24,7 +27,4 @@ class ListagemDespesas(serializers.ModelSerializer):
         model = Despesa
         fields = ['descricao','valor','categoria']
 
-class ResumoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Resumo
-        fields = '__all__'
+

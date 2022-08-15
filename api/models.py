@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms import DateField
+from rest_framework.exceptions import ValidationError
 
 def receita_filtro_descricao(descricao):
     return Receita.objects.filter(descricao = descricao).exists()
@@ -12,24 +13,10 @@ class Receita(models.Model):
     data = models.DateField()
     
     def save(self, *args, **kwargs):
-        if Receita.objects.filter(descricao=self.descricao, data=self.data):
-            raise ValueError("Registro Duplicado !")
-        
-        elif not receita_filtro_descricao(self.descricao):  # Cria/atualiza um registro
-            super().save(*args, **kwargs)
-        
-        elif Receita.objects.filter(data__month=self.data.month,
-                                    data__year=self.data.year).exists() and not receita_filtro_descricao(
-            self.descricao):   # Cria/atualiza um registro
-            super().save(*args, **kwargs)
-            super().save(*args, **kwargs)
-        
-        elif receita_filtro_descricao(self.descricao) and not Receita.objects.filter(
-                descricao=self.descricao, data__month=self.data.month, data__year=self.data.year).exists():
-            # Atualiza a data do registro
-            super().save(*args, **kwargs)
+        if Receita.objects.filter(descricao__icontains=self.descricao, data__month=self.data.month, data__year=self.data.year):
+            raise ValidationError(f"A receita {self.descricao} já existe nesse mês") 
         else:
-            raise ValueError("Erro no Registro !")
+            super().save(*args, **kwargs)
 
 
 def despesa_filtro_descricao(descricao):
@@ -53,31 +40,15 @@ class Despesa(models.Model):
     valor = models.FloatField()
     data = models.DateField()
     categoria = models.CharField(choices = CATEGORIAS, default = 'Outras', blank = False, null = False, max_length = 15)
-    
-    def save(self, *args, **kwargs): 
-        if Despesa.objects.filter(descricao=self.descricao, data=self.data):
-            raise ValueError("Registro Duplicado !")
-        
-        elif not despesa_filtro_descricao(self.descricao):   # Cria/atualiza um registro
-            super().save(*args, **kwargs)
-        
-        elif Despesa.objects.filter(data__month=self.data.month,
-                                    data__year=self.data.year).exists() and not despesa_filtro_descricao(
-            self.descricao):   # Cria/atualiza um registro
-            super().save(*args, **kwargs)
 
-        elif despesa_filtro_descricao(self.descricao) and not Despesa.objects.filter(
-                descricao=self.descricao, data__month=self.data.month, data__year=self.data.year).exists():
-            # Atualiza a data do registro
-            super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if Despesa.objects.filter(descricao__icontains=self.descricao, data__month=self.data.month, data__year=self.data.year, categoria = self.categoria):
+            raise ValidationError(f"A despesa {self.descricao} já existe nesse mês") 
         else:
-            raise ValueError("Erro no Registro !")
+            super().save(*args, **kwargs)
+    
+   
 
 
-class Resumo(models.Model):
-    receita_total = models.FloatField()
-    despesa_total = models.FloatField()
-    saldo = models.FloatField()
-    gasto_categoria = models.TextField()
     
 

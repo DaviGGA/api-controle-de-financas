@@ -4,7 +4,7 @@ from django.db.models import Sum
 from rest_framework.response import Response
 
 from .models import Receita, Despesa
-from .serializer import ReceitasSerializer, DespesasSerializer, ListagemReceitas, ListagemDespesas, ResumoSerializer
+from .serializer import ReceitasSerializer, DespesasSerializer, ListagemReceitas, ListagemDespesas
 
 class ReceitasViewset(viewsets.ModelViewSet):
     '''Exibindo todas as receitas'''
@@ -52,7 +52,6 @@ class ResumoDoMes(APIView):
             'Saldo final do Mês' : f"R${saldo}",
             'Gasto por categoria' : gasto_por_categoria
         })
-
 
 
 
