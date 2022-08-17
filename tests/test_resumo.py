@@ -8,16 +8,16 @@ class ResumoTestCase(APITestCase):
 
     def setUp(self):
         self.receita = Receita.objects.create(
-            descricao = 'Salário', valor = 5000, data = datetime.now()
+            descricao = 'Salário', valor = 5000, data = datetime.now(), usuario = 1
         )
         self.despesa_01 = Despesa.objects.create(
-            descricao = 'Supermercado', valor = 500, data = datetime.now(), categoria = 'Alimentação'
+            descricao = 'Supermercado', valor = 500, data = datetime.now(), categoria = 'Alimentação', usuario = 1
         )
         self.despesa_02 = Despesa.objects.create(
-            descricao = 'Faculdade', valor = 1500, data = datetime.now(), categoria = 'Educação'
+            descricao = 'Faculdade', valor = 1500, data = datetime.now(), categoria = 'Educação', usuario = 1
         )
         self.despesa_03 = Despesa.objects.create(
-            descricao = 'Curso de Inglês', valor = 1000, data = datetime.now(), categoria = 'Educação'
+            descricao = 'Curso de Inglês', valor = 1000, data = datetime.now(), categoria = 'Educação', usuario = 1
         )
 
        

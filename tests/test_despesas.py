@@ -25,7 +25,8 @@ class DespesasTestCase(APITestCase):
             'descricao' : 'Testing',
             'valor' : 100,
             'data' : '2000-01-01',
-            'categoria' : 'Moradia'
+            'categoria' : 'Moradia',
+            'id' : 1
         }
         
         response = self.client.post(self.list_url, data = data)
@@ -42,7 +43,8 @@ class DespesasTestCase(APITestCase):
             'descricao' : 'Supermercado',
             'valor' : 100,
             'data' : '2000-01-01',
-            'categoria' : 'Alimentação'
+            'categoria' : 'Alimentação',
+            'id' : 1
         }
         
         response = self.client.post(self.list_url, data = data)
@@ -54,7 +56,8 @@ class DespesasTestCase(APITestCase):
             'descricao' : 'Supermercado',
             'valor' : 100,
             'data' : '2001-01-01',
-            'categoria' : 'Alimentação'
+            'categoria' : 'Alimentação',
+            'id' : 1
         }
         
         response = self.client.post(self.list_url, data = data)

@@ -2,26 +2,18 @@ from django.db import models
 from django.forms import DateField
 from rest_framework.exceptions import ValidationError
 
-def receita_filtro_descricao(descricao):
-    return Receita.objects.filter(descricao = descricao).exists()
-
-
 class Receita(models.Model):
     '''Cria as models de receita'''
+    usuario = models.ForeignKey('auth.User', on_delete= models.CASCADE)
     descricao = models.CharField (max_length= 100)
     valor = models.FloatField()
     data = models.DateField()
     
     def save(self, *args, **kwargs):
-        if Receita.objects.filter(descricao__icontains=self.descricao, data__month=self.data.month, data__year=self.data.year):
+        if Receita.objects.filter(descricao__icontains=self.descricao, data__month=self.data.month, data__year=self.data.year, usuario = self.usuario):
             raise ValidationError(f"A receita {self.descricao} já existe nesse mês") 
         else:
             super().save(*args, **kwargs)
-
-
-def despesa_filtro_descricao(descricao):
-    return Despesa.objects.filter(descricao=descricao).exists()
-
 
 class Despesa(models.Model):
     '''Cria as models de despesa'''
@@ -36,6 +28,7 @@ class Despesa(models.Model):
         ('Outras', 'Outras')
     )
     
+    usuario = models.ForeignKey('auth.User', on_delete= models.CASCADE)
     descricao = models.CharField(max_length= 100)
     valor = models.FloatField()
     data = models.DateField()
@@ -47,7 +40,6 @@ class Despesa(models.Model):
         else:
             super().save(*args, **kwargs)
     
-   
 
 
     
