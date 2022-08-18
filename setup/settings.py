@@ -83,10 +83,11 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'api_financeira',
-        'USER': 'davigrg',
-        'PASSWORD': 'ALRTSTSNH22',
-        'HOST': 'localhost'
+        'NAME': 'da66ga51phevmh',
+        'USER': 'wyjefxtnlrwidj',
+        'PASSWORD': '3ec3f33645965cd0bb37d160cd15ca14821d6d24a25959f18196546b4fab7ebf',
+        'HOST': 'ec2-44-205-64-253.compute-1.amazonaws.com',
+        'PORT': 5432
     }
 }
 
