@@ -1,1 +1,1 @@
-web: gunicorn setup.wgsi
+web: gunicorn setup.wgsi --log-file--
