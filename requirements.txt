@@ -36,6 +36,7 @@ ruamel.yaml.clib==0.2.6
 sqlparse==0.4.2
 tomli==2.0.1
 tzdata==2022.1
+Unipath==1.1
 uritemplate==4.1.1
 urllib3==1.26.11
 whitenoise==6.2.0
