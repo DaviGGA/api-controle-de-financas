@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from pickle import FALSE
-import django_heroku
+import django_heroku 
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-mrr1^nw6799fnke(lmka*6zb5$v-ecm=pv2a7h^ki(d4rkj1ts
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://drf-api-financeira.herokuapp.com/']
 
 
 # Application definition
@@ -127,6 +127,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -143,3 +144,4 @@ REST_FRAMEWORK = {
     ],
 }
 
+django_heroku.settings(locals())

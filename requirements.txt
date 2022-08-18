@@ -11,7 +11,6 @@ Django==4.1
 django-filter==22.1
 django-heroku==0.3.1
 djangorestframework==3.13.1
-djangorestframework-simplejwt==5.2.0
 drf-yasg==1.21.3
 gunicorn==20.1.0
 idna==3.3
