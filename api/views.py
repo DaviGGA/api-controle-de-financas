@@ -4,7 +4,7 @@ from django.db.models import Sum
 from rest_framework.response import Response
 from .models import *
 from .serializer import *
-
+from rest_framework.permissions import AllowAny
 
 class ReceitasViewset(viewsets.ModelViewSet):
     '''Exibindo todas as receitas'''
@@ -80,8 +80,7 @@ class ResumoDoMes(APIView):
 class UsuarioRegistroViewSet(generics.CreateAPIView):
     '''Cria, deleta, atualiza usuários'''
     serializer_class = UsuarioRegistroSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['id','email']
+    permission_classes = (AllowAny,)
 
 
 class UsuarioViewSet (viewsets.ModelViewSet):

@@ -9,21 +9,23 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+from dj_database_url import parse as db_url
+from decouple import config
 from pathlib import Path
+from unipath import Path
 from pickle import FALSE
 import django_heroku 
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mrr1^nw6799fnke(lmka*6zb5$v-ecm=pv2a7h^ki(d4rkj1ts'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -81,14 +83,11 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'da66ga51phevmh',
-        'USER': 'wyjefxtnlrwidj',
-        'PASSWORD': '3ec3f33645965cd0bb37d160cd15ca14821d6d24a25959f18196546b4fab7ebf',
-        'HOST': 'ec2-44-205-64-253.compute-1.amazonaws.com',
-        'PORT': 5432
-    }
+    'default': config(
+        'DATABASE_URL',
+        default='sqlite:///' + BASE_DIR.child('db.sqlite3'),
+        cast=db_url
+    )
 }
 
 
