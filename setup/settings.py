@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-mrr1^nw6799fnke(lmka*6zb5$v-ecm=pv2a7h^ki(d4rkj1ts
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['drf-api-financeira.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['drf-api-financeira.herokuapp.com','127.0.0.1','localhost']
 
 
 # Application definition
@@ -145,4 +145,4 @@ REST_FRAMEWORK = {
     ],
 }
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
