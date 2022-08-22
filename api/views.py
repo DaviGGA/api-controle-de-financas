@@ -59,13 +59,11 @@ class ResumoDoMes(APIView):
         despesa_do_mes = Despesa.objects.filter(data__month = mes, data__year = ano,usuario = self.request.user).aggregate(Sum('valor')) ['valor__sum'] or 0
         saldo = receita_do_mes - despesa_do_mes
         gasto_por_categoria = Despesa.objects.filter(data__month = mes, data__year = ano, usuario = self.request.user).values('categoria').annotate(valor_total = Sum('valor'))
-        categorias_resumo = ['Alimentação','Saúde','Moradia','Transporte','Educação','Lazer','Imprevistos','Outras']
         gasto_por_categoria_porcento = []
         gasto_por_categoria_individual = 0
-        for categoria in categorias_resumo:
-            if Despesa.objects.filter(data__month = mes, data__year = ano, categoria = categoria, usuario = self.request.user).aggregate(Sum('valor')) ['valor__sum'] or 0 > 0:
-                gasto_por_categoria_individual= Despesa.objects.filter(data__month = mes, data__year = ano, categoria = categoria, usuario = self.request.user).aggregate(Sum('valor')) ['valor__sum'] or 0
-                gasto_por_categoria_porcento.append({f'{categoria}' : f'{100*gasto_por_categoria_individual/despesa_do_mes:.2f}%'})
+        for categoria in gasto_por_categoria:
+            gasto_por_categoria_individual = categoria['valor_total']
+            gasto_por_categoria_porcento.append({f'{categoria}' : f'{100*gasto_por_categoria_individual/despesa_do_mes:.2f}%'})
 
 
         return Response ({

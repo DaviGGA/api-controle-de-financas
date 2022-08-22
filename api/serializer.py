@@ -3,31 +3,32 @@ import email
 from rest_framework import serializers
 from api.models import *
 from django.contrib.auth.models import User
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class ReceitasSerializer(serializers.ModelSerializer):
     '''Serializador da classe Receita'''
     class Meta:
         model = Receita
-        fields = ['descricao','valor', 'data']
+        fields = ['id','descricao','valor', 'data']
 
 
 class DespesasSerializer(serializers.ModelSerializer):
     '''Serializador da classe Despesa'''
     class Meta:
         model = Despesa
-        fields = ['descricao','valor', 'data','categoria']
+        fields = ['id','descricao','valor', 'data','categoria']
 
 
 class ListagemReceitas(serializers.ModelSerializer):
     class Meta:
         model = Receita
-        fields = ['descricao','valor']
+        fields = ['id','descricao','valor']
 
 class ListagemDespesas(serializers.ModelSerializer):
     class Meta:
         model = Despesa
-        fields = ['descricao','valor','categoria']
+        fields = ['id','descricao','valor','categoria']
 
 class UsuarioRegistroSerializer(serializers.ModelSerializer):
     '''Serializador para Usuário'''
@@ -38,6 +39,7 @@ class UsuarioRegistroSerializer(serializers.ModelSerializer):
             'password' : {'write_only' : True, 'required' : True},
             'email' : {'required' : True},
         }
+
 
 
     def create(self,validated_data):
@@ -51,6 +53,7 @@ class UsuarioRegistroSerializer(serializers.ModelSerializer):
         usuario.save()
 
         return usuario
+
 
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
