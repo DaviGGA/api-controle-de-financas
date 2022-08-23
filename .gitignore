@@ -7,14 +7,15 @@ db.sqlite3
 db.sqlite3-journal
 media
 ../.env
-.venv
 .env
 .env/
-venv/
 ENV/
 env.bak/
+.venv
+venv/
 venv.bak/
 ../venv
 ./venv
 ./.venv
 ../.venv
+venv.bak/
