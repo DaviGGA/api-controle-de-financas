@@ -11,6 +11,7 @@ Django==4.1
 django-filter==22.1
 django-heroku==0.3.1
 djangorestframework==3.13.1
+djangorestframework-simplejwt==5.2.0
 drf-yasg==1.21.3
 gunicorn==20.1.0
 idna==3.3
@@ -23,6 +24,7 @@ MarkupSafe==2.1.1
 packaging==21.3
 pluggy==1.0.0
 psycopg2==2.9.3
+psycopg2-binary==2.9.3
 py==1.11.0
 PyJWT==2.4.0
 pyparsing==3.0.9
@@ -36,8 +38,7 @@ ruamel.yaml.clib==0.2.6
 sqlparse==0.4.2
 tomli==2.0.1
 tzdata==2022.1
+Unipath==1.1
 uritemplate==4.1.1
 urllib3==1.26.11
 whitenoise==6.2.0
-Unipath==1.1
-djangorestframework-simplejwt==5.2.0
